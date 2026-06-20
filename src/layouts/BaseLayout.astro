@@ -1,0 +1,104 @@
+---
+import "../styles/global.css";
+
+const {
+  title = "New Solar Somalia",
+  description = "A lightweight commercial solar calculator for businesses in Mogadishu.",
+  image = "/new-solar-logo-crop.png",
+} = Astro.props;
+
+const siteUrl = new URL(Astro.site ?? "https://newsolars.com");
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const imageUrl = new URL(image, siteUrl).toString();
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/calculator", label: "Calculator" },
+  { href: "/methodology", label: "Methodology" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta property="og:site_name" content="New Solar Somalia" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="New Solar home">
+        <img class="brand-mark" src="/new-solar-logo-crop.png" alt="" width="48" height="36" />
+        <span>New Solar Somalia</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span class="menu-label">Menu</span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        {
+          navItems.map((item) => (
+            <a href={item.href} aria-current={Astro.url.pathname === item.href ? "page" : undefined}>
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>Estimates only. New Solar results are not a final engineering design.</p>
+      <p><a href="mailto:support@newsolars.com">support@newsolars.com</a></p>
+      <p>&copy; {new Date().getFullYear()} New Solar Somalia. All rights reserved.</p>
+    </footer>
+    <script>
+      const menuButton = document.querySelector(".menu-toggle");
+      const siteHeader = document.querySelector(".site-header");
+      const siteNav = document.querySelector(".site-nav");
+
+      function closeMobileMenu() {
+        siteHeader?.removeAttribute("data-menu-open");
+        menuButton?.setAttribute("aria-expanded", "false");
+      }
+
+      menuButton?.addEventListener("click", () => {
+        const isOpen = siteHeader?.getAttribute("data-menu-open") === "true";
+        siteHeader?.toggleAttribute("data-menu-open", !isOpen);
+        menuButton.setAttribute("aria-expanded", String(!isOpen));
+      });
+
+      siteNav?.addEventListener("click", (event) => {
+        if (event.target instanceof HTMLAnchorElement) {
+          closeMobileMenu();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeMobileMenu();
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SolarCalculator from "../components/SolarCalculator.svelte";
+---
+
+<BaseLayout
+  title="Solar Calculator | New Solar Somalia"
+  description="Calculate solar size, panels, roof space, savings, payback, and backup guidance for a business in Mogadishu."
+>
+  <section class="page-intro">
+    <p class="eyebrow">Calculator</p>
+    <h1>Commercial solar estimate</h1>
+    <p class="lead">
+      Enter your business energy use and site details to receive a quick planning estimate. Results are saved only in this browser.
+    </p>
+  </section>
+
+  <SolarCalculator client:only="svelte" />
+</BaseLayout>

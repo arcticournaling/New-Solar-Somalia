@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Methodology | New Solar Somalia"
+  description="Assumptions and formulas used by the New Solar commercial solar calculator."
+>
+  <section class="page-intro">
+    <p class="eyebrow">Methodology</p>
+    <h1>How the estimate works</h1>
+    <p class="lead">
+      New Solar Somalia V1 uses simple planning assumptions. A qualified solar engineer should confirm equipment, layout, and safety before purchase or installation.
+    </p>
+  </section>
+
+  <section class="section compact">
+    <h2>Core assumptions</h2>
+    <div class="table-wrap">
+      <table>
+        <tbody>
+          <tr>
+            <th>Average peak sun hours in Mogadishu</th>
+            <td>5.7 hours/day</td>
+          </tr>
+          <tr>
+            <th>System efficiency factor</th>
+            <td>0.75</td>
+          </tr>
+          <tr>
+            <th>Default panel power rating</th>
+            <td>550 W commercial panel</td>
+          </tr>
+          <tr>
+            <th>Panel options used on results page</th>
+            <td>270 W / 1.6 square meters, 450 W / 2.1 square meters, 550 W / 2.6 square meters</td>
+          </tr>
+          <tr>
+            <th>Installed solar cost range</th>
+            <td>$1,000-$1,600 per kW</td>
+          </tr>
+          <tr>
+            <th>Battery cost estimate</th>
+            <td>$300-$500 per kWh</td>
+          </tr>
+          <tr>
+            <th>Example battery module size</th>
+            <td>5 kWh</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section compact">
+    <h2>Formulas</h2>
+    <div class="formula-list">
+      <p><strong>Daily energy use:</strong> monthly kWh / 30</p>
+      <p><strong>Target daily solar:</strong> daily kWh x selected coverage percentage</p>
+      <p><strong>System size:</strong> target daily solar / (5.7 x 0.75)</p>
+      <p><strong>Panel count:</strong> ceiling((system size kW x 1000) / selected panel rating)</p>
+      <p><strong>Roof space required:</strong> panel count x selected panel area</p>
+      <p><strong>Roof limit:</strong> floor(entered roof area / 2.6) panels, using the default 550 W panel assumption</p>
+      <p><strong>Monthly production:</strong> roof-limited system size x 5.7 x 30 x 0.75</p>
+      <p><strong>Monthly grid savings:</strong> billable solar kWh x electricity cost per kWh</p>
+      <p><strong>Diesel savings:</strong> $0 for none, 25% of diesel cost for occasional, 60% for daily</p>
+      <p><strong>Total monthly savings:</strong> monthly grid savings + diesel savings</p>
+      <p><strong>Solar cost:</strong> roof-limited system size x $1,000-$1,600 per kW</p>
+      <p><strong>Soft costs:</strong> 15%-25% for mounting, wiring, protection equipment, transport, labor, and small design/site costs</p>
+      <p><strong>Payback:</strong> estimated total cost range / annual total monthly savings</p>
+      <p><strong>Battery storage:</strong> daily kWh x 30% when selected</p>
+      <p><strong>Battery modules:</strong> ceiling(battery storage / 5 kWh)</p>
+      <p><strong>Total cost:</strong> solar system cost + battery cost + soft costs</p>
+    </div>
+  </section>
+
+  <section class="section compact">
+    <h2>Panel efficiency vs. system efficiency</h2>
+    <div class="formula-list">
+      <p><strong>Panel efficiency</strong>, such as 21%, describes how well one panel converts sunlight into electricity. It affects panel size and panel power rating.</p>
+      <p><strong>System efficiency factor</strong> estimates real-world losses from heat, dust, wiring, inverter losses, and installation conditions. This calculator uses 75% system efficiency.</p>
+      <p>Changing panel rating on the results page changes the estimated number of panels and roof space only. It does not change the energy-based system size, estimated production, savings, cost, or payback.</p>
+    </div>
+  </section>
+
+  <section class="notice-band">
+    <div>
+      <h2>Important disclaimer</h2>
+      <p>These estimates are for early budgeting only. They do not replace a roof inspection, load audit, structural review, electrical design, or supplier quote.</p>
+    </div>
+    <a class="button primary" href="/calculator">Open calculator</a>
+  </section>
+</BaseLayout>
